@@ -15,7 +15,7 @@ export async function onRequestPost({ request, env }) {
   const language = ({ fr: 'French', en: 'English', ar: 'Arabic' })[clean(data.language, 5)] || 'French';
   const history = Array.isArray(data.history) ? data.history.slice(-6) : [];
   const contents = history.map(item => ({ role: item.role === 'assistant' ? 'model' : 'user', parts: [{ text: clean(item.text, 900) }] })).filter(item => item.parts[0].text);
-  contents.push({ role: 'user', parts: [{ text: `${CONTEXT}\n\nReply in ${language}. Current visitor question: ${message}` }] });
+  contents.push({role: 'user', parts: [{text: `${CONTEXT} Reply in the same language as the current visitor's question. Detect the language from their message and do not use the website language when the question is clearly written in another language. If the message is too short, ambiguous, or mixed-language, use ${language} as the fallback language. Current visitor question: ${message}`}]});
   const model = env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
   try {
     const endpoint = 'https:' + '//' + 'generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent?key=' + encodeURIComponent(env.GEMINI_API_KEY);
