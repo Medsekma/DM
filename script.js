@@ -5,7 +5,44 @@ const text={
  en:{placeholder:'Ask your question…',welcome:'Hello. How can I help with our products or your commercial inquiry?',online:'connected',offline:'AI not configured',thinking:'Thinking',aiError:'The AI assistant cannot respond right now.',missing_key:'The Gemini key was not detected on Render. Check the GEMINI_API_KEY variable and redeploy.',invalid_key:'Gemini rejected the API key. Check that it is valid and enabled in Google AI Studio.',free_quota:'The free Gemini quota is temporarily exhausted. Please try again later.',timeout:'Gemini is taking too long to respond. Please retry.',provider_error:'Gemini returned an empty or blocked response. Rephrase the question and retry.',rate_limit:'Too many messages. Please wait one minute.',startQuote:'Start inquiry',openForm:'Open contact form',emailUs:'Send an email',products:'What products do you offer?',quality:'Talk to the commercial team',quote:'I would like a quote',leadProduct:'Certainly. Which product are you interested in?',leadRole:'What best describes your professional role?',leadCountry:'Which country or target market is this for?',leadVolume:'What approximate annual volume do you expect?',leadTimeline:'What is your desired timeline?',leadCompany:'What is your organization’s name?',leadName:'What is your full name?',leadEmail:'What is your work email? You may add your phone number after a comma (optional).',leadPhone:'What is your phone number? You may also choose Skip.',badEmail:'That address does not look valid. Could you check it?',leadConsent:'May DM PHARMA store these business details and contact you about this inquiry?',leadDone:'Thank you {name}. Your inquiry was sent. A confirmation email has been sent to you.',leadSaved:'Thank you {name}. Your inquiry was recorded. Our team will respond shortly.',leadLocal:'The server could not save the inquiry. Use the contact form or email direction@dmpharma.com.tn.',decline:'Understood. Your contact details will not be stored.',sendOk:'Thank you. Your inquiry was sent and a confirmation email was sent to you.',sendSaved:'Thank you. Your inquiry was recorded. Our team will respond shortly.',sendFail:'The inquiry could not be saved. Email direction@dmpharma.com.tn.',chips:{product:['3 mL','5 mL','Insulin syringe — 0.5 mL / 1 mL','Multiple formats'],role:['Distributor','Healthcare organization','Procurement','Industrial partner'],timeline:['As soon as possible','3–6 months','6–12 months'],yes:['Yes, I agree','No thanks'],skip:['Skip']}},
  ar:{placeholder:'اطرح سؤالك…',welcome:'مرحباً. كيف يمكنني مساعدتكم بخصوص المنتجات أو طلبكم التجاري؟',online:'متصل',offline:'الذكاء الاصطناعي غير مهيأ',thinking:'جارٍ التحليل',aiError:'يتعذر على المساعد الإجابة حالياً.',missing_key:'لم يتم اكتشاف مفتاح Gemini على Render. تحقق من GEMINI_API_KEY ثم أعد النشر.',invalid_key:'رفض Gemini مفتاح API. تحقق من صلاحيته في Google AI Studio.',free_quota:'تم استهلاك الحصة المجانية مؤقتاً. يرجى المحاولة لاحقاً.',timeout:'تأخر Gemini في الرد. يرجى المحاولة مجدداً.',provider_error:'أعاد Gemini رداً فارغاً أو محظوراً. أعد صياغة السؤال وحاول مجدداً.',rate_limit:'رسائل كثيرة. يرجى الانتظار دقيقة.',startQuote:'بدء الطلب',openForm:'فتح نموذج الاتصال',emailUs:'إرسال بريد إلكتروني',products:'ما هي المنتجات المتوفرة؟',quality:'التحدث مع الفريق التجاري',quote:'أرغب في عرض سعر',leadProduct:'بكل سرور. ما المنتج المطلوب؟',leadRole:'ما صفتكم المهنية؟',leadCountry:'ما البلد أو السوق المستهدف؟',leadVolume:'ما الحجم السنوي التقريبي؟',leadTimeline:'ما الجدول الزمني المطلوب؟',leadCompany:'ما اسم مؤسستكم؟',leadName:'ما اسمكم الكامل؟',leadEmail:'ما بريدكم الإلكتروني المهني؟ يمكنكم إضافة رقم الهاتف بعد فاصلة (اختياري).',leadPhone:'ما رقم هاتفكم؟ يمكنكم أيضاً اختيار تخطي.',badEmail:'يبدو أن العنوان غير صالح. يرجى التحقق منه.',leadConsent:'هل تسمحون لـ DM PHARMA بحفظ هذه البيانات المهنية والتواصل معكم؟',leadDone:'شكراً {name}. تم إرسال طلبكم وبريد التأكيد.',leadSaved:'شكراً {name}. تم تسجيل طلبكم وسيتواصل معكم فريقنا قريباً.',leadLocal:'تعذر على الخادم حفظ الطلب. استخدموا نموذج الاتصال أو direction@dmpharma.com.tn.',decline:'مفهوم. لن يتم حفظ بيانات الاتصال.',sendOk:'شكراً. تم إرسال طلبكم وبريد التأكيد.',sendSaved:'شكراً. تم تسجيل طلبكم وسيتواصل معكم فريقنا قريباً.',sendFail:'تعذر حفظ الطلب. راسلوا direction@dmpharma.com.tn.',chips:{product:['3 مل','5 مل','محقنة أنسولين — 0.5 مل / 1 مل','عدة أحجام'],role:['موزع','مؤسسة صحية','مشتريات','شريك صناعي'],timeline:['في أقرب وقت','3–6 أشهر','6–12 شهراً'],yes:['نعم، أوافق','لا، شكراً'],skip:['تخطي']}}
 };
-function setLang(value){lang=['fr','en','ar'].includes(value)?value:'fr';document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';$$('[data-fr]').forEach(el=>{const value=el.dataset[lang]||el.dataset.fr;el.tagName==='OPTION'?el.textContent=value:el.innerHTML=value});$$('[data-lang]').forEach(button=>button.classList.toggle('active',button.dataset.lang===lang));$('.chat-input input').placeholder=text[lang].placeholder;const productImage=$('.product-visual img');if(productImage)productImage.src=lang==='ar'?'assets/products-ar.webp':'assets/products.webp';localStorage.setItem('dm_lang',lang);resetWelcome()}
+function setLang(value) {
+  lang = ['fr', 'en', 'ar'].includes(value) ? value : 'fr';
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+  $$('[data-fr]').forEach(el => {
+    const value = el.dataset[lang] || el.dataset.fr;
+    el.tagName === 'OPTION' ? el.textContent = value : el.innerHTML = value;
+  });
+
+  $$('[data-lang]').forEach(button => {
+    button.classList.toggle('active', button.dataset.lang === lang);
+  });
+
+  $('.chat-input input').placeholder = text[lang].placeholder;
+
+  const productImage = $('.product-visual img');
+  if (productImage) {
+    productImage.src = lang === 'ar'
+      ? 'assets/products-ar.webp'
+      : 'assets/products.webp';
+  }
+
+  localStorage.setItem('dm_lang', lang);
+
+  // First page load: show the welcome sequence.
+  if (!chatInitialized) {
+    chatLang = lang;
+    resetWelcome();
+    chatInitialized = true;
+    return;
+  }
+
+  // Later website language switches preserve the conversation.
+  // New guided messages will follow the newly selected language.
+  chatLang = lang;
+}
 $$('[data-lang]').forEach(button=>button.addEventListener('click',()=>setLang(button.dataset.lang)));
 
 const header=$('#header'),menu=$('.menu'),nav=$('nav'),chat=$('.chat'),body=$('.chat-body'),launcher=$('.chat-launch'),statusText=$('.chat header small span');
@@ -15,7 +52,7 @@ menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.
 new IntersectionObserver(([entry])=>launcher.classList.toggle('hero-pos',entry.isIntersecting),{threshold:.15}).observe($('#home'));
 const reveals=$$('.intro>*,.head,.product-visual,.cards,.machine-photo,.machine-copy,.quality-title,.quality-grid,.map,.location-copy,.contact>*,footer>*');reveals.forEach(el=>el.classList.add(el.matches('.cards,.quality-grid')?'reveal-stagger':'reveal'));const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -40px'});reveals.forEach(el=>observer.observe(el));
 
-let history=[],healthChecked=false,aiReady=false,lead={stage:'idle'};
+let history=[],healthChecked=false,aiReady=false,lead={stage:'idle'},chatLang='fr',chatInitialized=false;
 function bubble(message,type='bot',extra=''){const el=document.createElement('div');el.className=`bubble ${type} ${extra}`.trim();el.textContent=message;body.append(el);body.scrollTop=body.scrollHeight;return el}
 function typing(){const el=document.createElement('div');el.className='bubble bot typing';el.innerHTML='<i></i><i></i><i></i>';body.append(el);body.scrollTop=body.scrollHeight;return el}
 function chips(items){$('.quick',body)?.remove();const wrap=document.createElement('div');wrap.className='quick';items.forEach(item=>{const button=document.createElement('button');button.type='button';button.textContent=item;button.onclick=()=>{bubble(item,'user');wrap.remove();handle(item)};wrap.append(button)});body.append(wrap);body.scrollTop=body.scrollHeight}
@@ -23,12 +60,23 @@ function resetWelcome(){if(!body)return;body.innerHTML='';bubble(text[lang].welc
 function setStatus(ready){aiReady=ready;statusText.textContent=ready?text[lang].online:text[lang].offline;statusText.parentElement.classList.toggle('offline',!ready)}
 async function checkHealth(force=false){if(healthChecked&&!force)return aiReady;try{const response=await fetch('/api/health',{cache:'no-store'}),data=await response.json();setStatus(Boolean(data.aiReady ?? data.aiConfigured));healthChecked=true;return aiReady}catch{setStatus(false);return false}}
 function apiError(code,message){const t=text[lang];return t[code]||message||t.aiError}
-async function askAI(message){const waiting=typing();try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({message,language:lang,history:history.slice(-6)})});const data=await response.json().catch(()=>({}));waiting.remove();if(!response.ok){setStatus(false);bubble(apiError(data.code,data.error),'bot','error');return}setStatus(true);bubble(data.answer);history.push({role:'user',text:message},{role:'assistant',text:data.answer});const suggestions=data.suggestedReplies?.length?data.suggestedReplies:[];if(data.intent==='quote')suggestions.unshift(text[lang].startQuote,text[lang].openForm,text[lang].emailUs);if(suggestions.length)chips([...new Set(suggestions)].slice(0,3))}catch{waiting.remove();setStatus(false);bubble(text[lang].aiError,'bot','error')}}
-function startLead(){lead={stage:'product',source:'chat',language:lang,interest:'',role:'',country:'',volume:'',timeline:'',company:'',name:'',email:'',phone:'',consent:false};bubble(text[lang].leadProduct);chips(text[lang].chips.product)}
-function isQuote(value){return value===text[lang].quote||value===text[lang].startQuote||/(devis|quote|عرض سعر)/i.test(value)}
+async function askAI(message){const waiting=typing();try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({message,language:lang,history:history.slice(-6)})});const data=await response.json().catch(()=>({}));waiting.remove();if(!response.ok){setStatus(false);bubble(apiError(data.code,data.error),'bot','error');return}setStatus(true);
+
+if (['fr', 'en', 'ar'].includes(data.language)) {
+  chatLang = data.language;
+}
+
+bubble(data.answer);
+history.push({role:'user',text:message},{role:'assistant',text:data.answer});const suggestions=data.suggestedReplies?.length?data.suggestedReplies:[];if(data.intent==='quote')suggestions.unshift(text[chatLang].startQuote,text[chatLang].openForm,text[chatLang].emailUs);if(suggestions.length)chips([...new Set(suggestions)].slice(0,3))}catch{waiting.remove();setStatus(false);bubble(text[lang].aiError,'bot','error')}}
+function startLead(){lead={stage:'product',source:'chat',language:chatLang,interest:'',role:'',country:'',volume:'',timeline:'',company:'',name:'',email:'',phone:'',consent:false};bubble(text[chatlang].leadProduct);chips(text[chatlang].chips.product)}
+function isQuote(value) {
+  return Object.values(text).some(t =>
+    value === t.quote || value === t.startQuote
+  ) || /(devis|quote|عرض سعر)/i.test(value);
+}
 function isYes(value){return /^(yes|yes, i agree|oui|oui, j’accepte|نعم|نعم، أوافق)$/i.test(value.trim())}function isSkip(value){return text[lang].chips.skip.includes(value)}function isNo(value){return /^(no|no thanks|non|non merci|لا|لا، شكراً)$/i.test(value.trim())}
 async function saveLead(){try{const response=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)});const data=await response.json().catch(()=>({}));return {ok:response.ok,data}}catch{return {ok:false,data:{}}}}
-function handle(value){const t=text[lang];if(value===t.openForm){closeChat();$('#contact').scrollIntoView({behavior:'smooth'});setTimeout(()=>$('#leadForm input')?.focus(),650);return}if(value===t.emailUs){location.href='mailto:direction@dmpharma.com.tn?subject=Commercial%20inquiry';return}if(lead.stage==='idle'){if(isQuote(value))return startLead();return askAI(value)}if(lead.stage==='product'){lead.interest=value;lead.stage='name';return bubble(t.leadName)}if(lead.stage==='name'){lead.name=value;lead.stage='email';return bubble(t.leadEmail)}if(lead.stage==='email'){const contact=value.match(/[^\s,;،/]+@[^\s,;،/]+\.[^\s,;،/]+/);if(!contact)return bubble(t.badEmail,'bot','error');lead.email=contact[0];lead.phone=value.replace(contact[0],'').replace(/^[\s,;،/]+|[\s,;،/]+$/g,'');lead.stage='company';return bubble(t.leadCompany)}if(lead.stage==='company'){lead.company=value;lead.stage='consent';bubble(t.leadConsent);return chips(t.chips.yes)}if(lead.stage==='consent'){if(isNo(value)){lead={stage:'idle'};bubble(t.decline);return chips([t.products,t.quality,t.quote])}if(!isYes(value)){bubble(t.leadConsent);return chips(t.chips.yes)}lead.consent=true;lead.stage='saving';const wait=typing();saveLead().then(result=>{wait.remove();bubble(result.ok?(result.data.emailed?t.leadDone:t.leadSaved).replace('{name}',lead.name):t.leadLocal,'bot',result.ok?'':'error');lead={stage:'idle'};chips([t.products,t.quality,t.quote])})}}
+function handle(value){const t=text[chatlang];if(value===t.openForm){closeChat();$('#contact').scrollIntoView({behavior:'smooth'});setTimeout(()=>$('#leadForm input')?.focus(),650);return}if(value===t.emailUs){location.href='mailto:direction@dmpharma.com.tn?subject=Commercial%20inquiry';return}if(lead.stage==='idle'){if(isQuote(value))return startLead();return askAI(value)}if(lead.stage==='product'){lead.interest=value;lead.stage='name';return bubble(t.leadName)}if(lead.stage==='name'){lead.name=value;lead.stage='email';return bubble(t.leadEmail)}if(lead.stage==='email'){const contact=value.match(/[^\s,;،/]+@[^\s,;،/]+\.[^\s,;،/]+/);if(!contact)return bubble(t.badEmail,'bot','error');lead.email=contact[0];lead.phone=value.replace(contact[0],'').replace(/^[\s,;،/]+|[\s,;،/]+$/g,'');lead.stage='company';return bubble(t.leadCompany)}if(lead.stage==='company'){lead.company=value;lead.stage='consent';bubble(t.leadConsent);return chips(t.chips.yes)}if(lead.stage==='consent'){if(isNo(value)){lead={stage:'idle'};bubble(t.decline);return chips([t.products,t.quality,t.quote])}if(!isYes(value)){bubble(t.leadConsent);return chips(t.chips.yes)}lead.consent=true;lead.stage='saving';const wait=typing();saveLead().then(result=>{wait.remove();bubble(result.ok?(result.data.emailed?t.leadDone:t.leadSaved).replace('{name}',lead.name):t.leadLocal,'bot',result.ok?'':'error');lead={stage:'idle'};chips([t.products,t.quality,t.quote])})}}
 function openChat(){chat.classList.add('open');chat.setAttribute('aria-hidden','false');checkHealth(true);setTimeout(()=>$('.chat-input input').focus(),120)}function closeChat(){chat.classList.remove('open');chat.setAttribute('aria-hidden','true');launcher.focus()}
 launcher.addEventListener('click',openChat);$('.close').addEventListener('click',closeChat);addEventListener('keydown',event=>{if(event.key==='Escape'&&chat.classList.contains('open'))closeChat()});
 $('.chat-input').addEventListener('submit',event=>{event.preventDefault();const input=$('input',event.currentTarget),value=input.value.trim();if(value){bubble(value,'user');input.value='';handle(value)}});
